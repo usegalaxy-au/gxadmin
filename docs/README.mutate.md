@@ -6,6 +6,7 @@ Command | Description
 [`mutate fail-history`](#mutate-fail-history) | Mark all jobs within a history to state error
 [`mutate fail-job`](#mutate-fail-job) | Sets a job state to error
 [`mutate fail-terminal-datasets`](#mutate-fail-terminal-datasets) | Causes the output datasets of jobs which were manually failed, to be marked as failed
+['mutate resubmit-job'](#mutate-resubmit-job) | Sets the job state to new in the database and forces Galaxy to resubmit it.
 
 ### mutate delete-group-role
 
@@ -113,3 +114,16 @@ Then to run with the --commit flag to commit the changes
     UPDATE 1
     COMMIT
 
+### mutate fail-job
+
+**NAME**
+
+mutate resubmit-job -  Sets a job state to new to force resubmission.
+
+**SYNOPSIS**
+
+`gxadmin mutate resbumit-job <job_id> [--commit]`
+
+**NOTES**
+
+Sets the job state to new in the database and forces Galaxy to resubmit it. Use this when a job is showing in Galaxy as queued but does not appear in the job sheduler software's queue. (e.g. The Slurm queue)

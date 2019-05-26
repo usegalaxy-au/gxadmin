@@ -3,6 +3,8 @@
 - Fixed:
 	- Correct bug in queue-detail and a couple other functions which did not
 	  correctly include data from anonymous users.
+-Added:
+    - "mutate resubmit-job" - sets a job state to "new" in the database to force resubmission to the job scheduler.
 
 # 13
 

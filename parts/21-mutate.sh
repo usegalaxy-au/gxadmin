@@ -187,3 +187,25 @@ mutate_delete-group-role() { ## <group_name> [--commit]: (NEW) Remove the group,
 	commit=$(should_commit "$2")
 	QUERY="BEGIN TRANSACTION; $QUERY; $commit"
 }
+
+mutate_resubmit-job() { ## <job_id> [--commit]: Sets a job state to new
+	handle_help "$@" <<-EOF
+		Sets a job's state to "new". This will force Galaxy to resubmit the job to the job sheduling software.
+        Use this when a job is shown in Galaxy's queue but not in the job shedulers. Sometimes the job sheduler fails to pick up Galaxy jobs.
+	EOF
+
+	assert_count_ge $# 1 "Must supply a job ID"
+	id=$1
+
+	read -r -d '' QUERY <<-EOF
+		UPDATE
+			job
+		SET
+			state = 'new'
+		WHERE
+			id = '$id'
+	EOF
+
+	commit=$(should_commit "$2")
+	QUERY="BEGIN TRANSACTION; $QUERY; $commit"
+}
